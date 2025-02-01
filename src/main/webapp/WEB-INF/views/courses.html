@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Courses</title>
+</head>
+<body>
+<h2>Courses</h2>
+
+<h1>List of Courses</h1>
+<a href="/courses/new">Create New Course</a>
+
+<ul>
+    <div th:each="course : ${courses}">
+        <li>
+            <span th:text="${course.title}"></span>
+            <span th:text="${course.dateOfStart}"></span>
+            <span th:text="${course.description}"></span>
+
+            <a th:href="@{/courses/edit/{id}(id=${course.id})}">Update</a>
+
+            <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="get" style="display:inline;">
+                <button type="submit">Delete</button>
+            </form>
+
+            <a th:href="@{/lessons/new(courseId=${course.id})}">Add Lesson</a>
+
+            <a th:href="@{/lessons(courseId=${course.id})}">View Lessons</a>
+
+            <a href="/dashboard">Back to Dashboard</a>
+        </li>
+    </div>
+</ul>
+</body>
+</html>

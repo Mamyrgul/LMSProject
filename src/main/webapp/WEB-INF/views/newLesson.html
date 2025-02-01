@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Lesson</title>
+</head>
+<body>
+<h2>Add Lesson</h2>
+
+<form action="/lessons" method="post">
+  <input type="hidden" name="courseId" th:value="${courseId}">
+
+  <label for="title">Lesson Title:</label>
+  <input type="text" id="title" name="title" required>
+
+  <label for="dateOfStart">Start Date:</label>
+  <input type="date" id="dateOfStart" name="dateOfStart" required>
+  <br>
+
+  <label for="description">Lesson Description:</label>
+  <textarea id="description" name="description" required></textarea>
+  <br>
+
+  <button type="submit">Save</button>
+</form>
+
+<a th:href="@{/lessons(courseId=${courseId})}">Back to Lessons</a>
+</body>
+</html>

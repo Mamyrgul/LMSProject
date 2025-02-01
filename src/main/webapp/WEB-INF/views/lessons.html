@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lessons</title>
+</head>
+<body>
+<h2>Lessons for Course</h2>
+
+<ul th:if="${lessons != null and not #lists.isEmpty(lessons)}">
+    <li th:each="lesson : ${lessons}">
+        <span th:text="${lesson.title}"></span>
+        <span th:text="${lesson.dateOfStart}"></span>
+        <span th:text="${lesson.description}"></span>
+
+        <a th:href="@{/lessons/edit/{id}(id=${lesson.id})}">Edit</a>
+
+        <form th:action="@{/lessons/delete/{id}(id=${lesson.id})}" method="post" style="display:inline;">
+            <input type="hidden" name="courseId" th:value="${courseId}">
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>
+
+<p th:if="${lessons == null or #lists.isEmpty(lessons)}">No lessons available.</p>
+
+<a th:href="@{/courses}">Back to Courses</a>
+</body>
+</html>

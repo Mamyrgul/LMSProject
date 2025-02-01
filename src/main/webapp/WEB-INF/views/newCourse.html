@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Course</title>
+</head>
+<body>
+
+<h1>Create New Course</h1>
+<form action="/courses" method="post">
+  <label for="title">First Name:</label>
+  <input type="text" id="title" name="title" required>
+  <br>
+  <label for="dateOfStart">Start Date:</label>
+  <input type="date" id="dateOfStart" name="dateOfStart" required>
+  <br>
+
+  <label for="description">Lesson Description:</label>
+  <textarea id="description" name="description" required></textarea>
+  <br>
+
+  <button type="submit">Save Course</button>
+</form>
+
+<a href="/courses">Back to Courses</a>
+
+</body>
+</html>

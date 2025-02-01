@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Students</title>
+</head>
+<body>
+
+<h1>List of Students</h1>
+<a href="/students/new">Create New Student</a>
+
+<ul>
+  <th:block th:each="student : ${students}">
+    <li>
+      <span th:text="${student.firstName}"></span> -
+      <span th:text="${student.email}"></span> -
+      <span th:text="${student.phoneNumber}"></span>
+
+      <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
+
+      <form th:action="@{/students/delete/{id}(id=${student.id})}" method="get" style="display: inline;">
+        <button type="submit" style="color: red;">Delete</button>
+      </form>
+
+      <a th:href="@{/students/assign}">Assign Student</a>
+
+      <a href="/dashboard">Back to Dashboard</a>
+    </li>
+  </th:block>
+</ul>
+
+</body>
+</html>
+

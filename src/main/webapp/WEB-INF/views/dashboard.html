@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+</head>
+<body>
+<h1>Dashboard</h1>
+
+<nav>
+  <a href="/courses">Courses</a>
+  <a href="/students">Students</a>
+  <a href="/instructors">Instructors</a>
+</nav>
+
+<hr>
+
+<section>
+  <h2>Courses</h2>
+  <a href="/courses/new">Create New Course</a>
+  <ul>
+    <li th:each="course : ${courses}">
+      <span th:text="${course.title}"></span>
+      <a th:href="@{/courses/edit/{id}(id=${course.id})}">Update</a>
+      <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="post" style="display:inline;">
+        <button type="submit">Delete</button>
+      </form>
+      <a th:href="@{/lessons/new(courseId=${course.id})}">Add Lesson</a>
+      <a th:href="@{/lessons(courseId=${course.id})}">View Lessons</a>
+    </li>
+  </ul>
+</section>
+
+<hr>
+
+<section>
+  <h2>Students</h2>
+  <a href="/students/new">Create New Student</a>
+  <ul>
+    <li th:each="student : ${students}">
+      <span th:text="${student.firstName}"></span> -
+      <span th:text="${student.email}"></span> -
+      <span th:text="${student.phoneNumber}"></span>
+      <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
+      <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" style="display: inline;">
+        <button type="submit" style="color: red;">Delete</button>
+      </form>
+      <a th:href="@{/students/assign}">Assign Student</a>
+    </li>
+  </ul>
+</section>
+
+<hr>
+
+<section>
+  <h2>Instructors</h2>
+  <a href="/instructors/new">Create New Instructor</a>
+  <ul>
+    <li th:each="instructor : ${instructors}">
+      <span th:text="${instructor.firstName}"></span> -
+      <span th:text="${instructor.lastName}"></span> -
+      <span th:text="${instructor.email}"></span> -
+      <span th:text="${instructor.phone}"></span>
+      <a th:href="@{/instructors/edit/{id}(id=${instructor.id})}">Edit</a>
+      <form th:action="@{/instructors/delete/{id}(id=${instructor.id})}" method="post" style="display: inline;">
+        <button type="submit" style="color: red;">Delete</button>
+      </form>
+      <a th:href="@{/instructors/assign}">Assign Instructor</a>
+    </li>
+  </ul>
+</section>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructors</title>
+</head>
+<body>
+
+<h1>List of Instructors</h1>
+<a href="/instructors/new">Create New Instructor</a>
+
+<ul>
+    <th:block th:each="instructor : ${instructors}">
+        <li>
+            <span th:text="${instructor.firstName}"></span> -
+            <span th:text="${instructor.lastName}"></span> -
+            <span th:text="${instructor.email}"></span> -
+            <span th:text="${instructor.phone}"></span>
+
+            <a th:href="@{/instructors/edit/{id}(id=${instructor.id})}">Edit</a>
+
+            <form th:action="@{/instructors/delete/{id}(id=${instructor.id})}" method="get" style="display: inline;">
+                <button type="submit" style="color: red;">Delete</button>
+            </form>
+
+            <a th:href="@{/instructors/assign}">Assign Instructor</a>
+
+            <a href="/dashboard">Back to Dashboard</a>
+
+        </li>
+    </th:block>
+</ul>
+
+</body>
+</html>

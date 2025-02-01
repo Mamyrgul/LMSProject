@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Lesson</title>
+</head>
+<body>
+<h2>Edit Lesson</h2>
+
+<form th:action="@{/lessons/update/{id}(id=${lesson.id})}" method="post">
+    <label for="title">Lesson Title:</label>
+    <input type="text" id="title" name="title" th:value="${lesson.title}" required>
+
+    <br><br>
+
+    <button type="submit">Update</button>
+</form>
+</body>
+</html>
