@@ -37,4 +37,9 @@ public class CourseServiceImpl  implements CourseService {
     public List<Lesson> findByCourseId(Long id) {
         return courseRepo.findByCourseId(id);
     }
+
+    @Override
+    public String updateCourse(Long id, Course course) {
+        return courseRepo.updateCourse(id, course);
+    }
 }

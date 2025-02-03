@@ -12,4 +12,5 @@ public interface CourseRepo {
     void deleteById(Long id);
     Course findById(Long id);
     List<Lesson> findByCourseId(Long id);
+    String updateCourse(Long id,Course course);
 }

@@ -29,7 +29,7 @@ public class CourseController {
         }
 
         @PostMapping
-        public String saveCourse(@ModelAttribute Course course) {
+        public String saveCourse(@ModelAttribute("course") Course course) {
             courseService.save(course);
             return "redirect:/courses";
         }
@@ -40,8 +40,15 @@ public class CourseController {
             model.addAttribute("course", course);
             return "editCourse";
         }
+    @PostMapping("/update/{id}")
+    public String updateCourse(@PathVariable("id") Long id, @ModelAttribute Course course) {
+        course.setId(id);
+        courseService.updateCourse(id, course);
+        return "redirect:/courses";
+    }
 
-        @GetMapping("/delete/{id}")
+
+    @GetMapping("/delete/{id}")
         public String deleteCourse(@PathVariable("id") Long id) {
             courseService.deleteById(id);
             return "redirect:/courses";

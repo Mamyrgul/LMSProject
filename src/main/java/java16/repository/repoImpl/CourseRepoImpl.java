@@ -47,4 +47,11 @@ public class CourseRepoImpl implements CourseRepo {
         Course course = entityManager.find(Course.class, id);
         return course.getLessons();
     }
+
+    @Override
+    public String updateCourse(Long id, Course course) {
+        course = entityManager.find(Course.class, id);
+        entityManager.merge(course);
+        return "successfully updated course";
+    }
 }
