@@ -27,7 +27,7 @@ public class DashboardController {
         model.addAttribute("courses", courseService.findAll());
         model.addAttribute("students", studentService.findAll());
         model.addAttribute("instructors", instructorService.findAll());
-        return "dashboard"; // Имя HTML-файла, который ты слил в один
+        return "dashboard";
     }
 }
 
