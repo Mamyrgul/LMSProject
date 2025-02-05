@@ -4,7 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java16.entities.Course;
+import java16.entities.Instructor;
 import java16.entities.Lesson;
+import java16.entities.Student;
 import java16.repository.CourseRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -31,10 +33,20 @@ public class CourseRepoImpl implements CourseRepo {
 
     @Override
     public void deleteById(Long id) {
-    Course course = entityManager.find(Course.class, id);
-    entityManager.remove(course);
-        System.out.println("successfully deleted course");
+        Course course = entityManager.find(Course.class, id);
+
+        for (Instructor instructor : course.getInstructors()) {
+            instructor.getCourses().remove(course);
+        }
+
+        for (Student student : course.getStudents()) {
+            student.getCourses().remove(course);
+        }
+
+        entityManager.remove(course);
+        System.out.println("Successfully deleted course");
     }
+
 
     @Override
     public Course findById(Long id) {
@@ -54,4 +66,14 @@ public class CourseRepoImpl implements CourseRepo {
         entityManager.merge(course);
         return "successfully updated course";
     }
+    public List<Instructor> findInstructorsByCourseId(Long courseId) {
+        Course course = entityManager.find(Course.class, courseId);
+        return course.getInstructors();
+    }
+    public List<Student> findStudentsByCourseId(Long courseId) {
+        Course course = entityManager.find(Course.class, courseId);
+        return course.getStudents();
+    }
+
+
 }

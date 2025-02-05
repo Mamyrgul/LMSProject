@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface LessonService {
     List<Lesson> findAll(Long courseId);
-    void save(Long courseId,Lesson lesson);
-    void deleteById(Long id);
-    Lesson findById(Long id);
-    String update(Long id, Lesson lesson);
+    Lesson findById(Long lessonId);
+    void save(Long courseId, Lesson lesson);
+    void update(Long courseId, Long lessonId, Lesson updatedLesson);
+    void deleteById(Long courseId, Long lessonId);
 }

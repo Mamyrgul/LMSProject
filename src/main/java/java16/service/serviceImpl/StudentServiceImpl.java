@@ -1,5 +1,6 @@
 package java16.service.serviceImpl;
 
+import java16.entities.Course;
 import java16.entities.Student;
 import java16.repository.StudentRepo;
 import java16.service.StudentService;
@@ -41,6 +42,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public String assignToCourse(Long courseId, Long studentId) {
         return studentRepo.assignToCourse(courseId, studentId);
+    }
+
+    @Override
+    public List<Course> findCoursesByStudentId(Long studentId) {
+        return studentRepo.findCoursesByStudentId(studentId);
     }
 }
 

@@ -4,71 +4,87 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dashboard</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fc;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #2c3e50;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+
+    nav {
+      background-color: #34495e;
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 20px;
+      font-size: 18px;
+      padding: 10px 15px;
+      border-radius: 5px;
+      background-color: #2980b9;
+      transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #1abc9c;
+    }
+
+    section {
+      margin: 30px;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .button {
+      background-color: #3498db;
+      color: white;
+      padding: 15px 30px;
+      border-radius: 5px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      display: inline-block;
+      margin: 10px;
+    }
+
+    .button:hover {
+      background-color: #2980b9;
+    }
+  </style>
 </head>
 <body>
-<h1>Dashboard</h1>
+<header>
+  <h1>Dashboard</h1>
+</header>
 
 <nav>
-  <a href="/courses">Courses</a>
-  <a href="/students">Students</a>
-  <a href="/instructors">Instructors</a>
+  <a href="/courses" class="button">Courses</a>
+  <a href="/students" class="button">Students</a>
+  <a href="/instructors" class="button">Instructors</a>
 </nav>
 
-<hr>
-
 <section>
-  <h2>Courses</h2>
-  <a href="/courses/new">Create New Course</a>
-  <ul>
-    <li th:each="course : ${courses}">
-      <span th:text="${course.title}"></span>
-      <a th:href="@{/courses/edit/{id}(id=${course.id})}">Update</a>
-      <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="post" style="display:inline;">
-        <button type="submit">Delete</button>
-      </form>
-      <a th:href="@{/lessons/new(courseId=${course.id})}">Add Lesson</a>
-      <a th:href="@{/lessons(courseId=${course.id})}">View Lessons</a>
-    </li>
-  </ul>
-</section>
-
-<hr>
-
-<section>
-  <h2>Students</h2>
-  <a href="/students/new">Create New Student</a>
-  <ul>
-    <li th:each="student : ${students}">
-      <span th:text="${student.firstName}"></span> -
-      <span th:text="${student.email}"></span> -
-      <span th:text="${student.phoneNumber}"></span>
-      <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
-      <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" style="display: inline;">
-        <button type="submit" style="color: red;">Delete</button>
-      </form>
-      <a th:href="@{/students/assign}">Assign Student</a>
-    </li>
-  </ul>
-</section>
-
-<hr>
-
-<section>
-  <h2>Instructors</h2>
-  <a href="/instructors/new">Create New Instructor</a>
-  <ul>
-    <li th:each="instructor : ${instructors}">
-      <span th:text="${instructor.firstName}"></span> -
-      <span th:text="${instructor.lastName}"></span> -
-      <span th:text="${instructor.email}"></span> -
-      <span th:text="${instructor.phone}"></span>
-      <a th:href="@{/instructors/edit/{id}(id=${instructor.id})}">Edit</a>
-      <form th:action="@{/instructors/delete/{id}(id=${instructor.id})}" method="post" style="display: inline;">
-        <button type="submit" style="color: red;">Delete</button>
-      </form>
-      <a th:href="@{/instructors/assign}">Assign Instructor</a>
-    </li>
-  </ul>
+  <h2>Welcome to the Dashboard</h2>
+  <p>Select an option from the menu above to manage your data.</p>
 </section>
 </body>
 </html>

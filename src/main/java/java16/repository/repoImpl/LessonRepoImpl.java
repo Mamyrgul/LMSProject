@@ -34,22 +34,29 @@ public class LessonRepoImpl implements LessonRepo {
     }
 
     @Override
-    public void deleteById(Long id) {
-        Lesson lesson = entityManager.find(Lesson.class, id);
+    public void deleteById(Long courseId, Long LessonId) {
+        Course course = entityManager.find(Course.class, courseId);
+        Lesson lesson = entityManager.find(Lesson.class, LessonId);
+
+        course.getLessons().remove(lesson);
         entityManager.remove(lesson);
-        System.out.println("Successfully deleted lesson " + id);
+        System.out.println("successfully deleted lesson");
     }
 
     @Override
-    public Lesson findById(Long id) {
-        Lesson lesson = entityManager.find(Lesson.class, id);
-        return lesson;
+    public Lesson findById(Long lessonId) {
+        return entityManager.find(Lesson.class, lessonId);
     }
 
     @Override
-    public String update(Long id, Lesson lesson) {
-        lesson = entityManager.find(Lesson.class, id);
-        entityManager.merge(lesson);
-        return "Successfully updated lesson " + id;
+    public void update(Long courseId, Long lessonId, Lesson updatedLesson) {
+        Lesson lesson = entityManager.find(Lesson.class, lessonId);
+        if (lesson != null && lesson.getCourse().getId().equals(courseId)) {
+            lesson.setTitle(updatedLesson.getTitle());
+            lesson.setDescription(updatedLesson.getDescription());
+            lesson.setDateOfStart(updatedLesson.getDateOfStart());
+            entityManager.merge(lesson);
+        }
     }
+
 }

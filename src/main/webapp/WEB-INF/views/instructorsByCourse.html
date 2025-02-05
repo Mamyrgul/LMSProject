@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructors in Course</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2980b9;
+      font-size: 36px;
+      margin-top: 30px;
+    }
+
+    table {
+      width: 90%;
+      margin: 20px auto;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #2980b9;
+      color: white;
+      font-size: 18px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #ecf0f1;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #ffffff;
+    }
+
+    tr:hover {
+      background-color: #dfe6e9;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin: 20px auto;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      width: 200px;
+    }
+
+    .back-link:hover {
+      background-color: #34495e;
+    }
+
+  </style>
+</head>
+<body>
+
+<h1>Instructors in Course</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Email</th>
+    <th>Phone</th>
+  </tr>
+  </thead>
+  <tbody>
+  <th:block th:each="instructor : ${instructors}">
+    <tr>
+      <td th:text="${instructor.id}"></td>
+      <td th:text="${instructor.firstName}"></td>
+      <td th:text="${instructor.lastName}"></td>
+      <td th:text="${instructor.email}"></td>
+      <td th:text="${instructor.phone}"></td>
+    </tr>
+  </th:block>
+  </tbody>
+</table>
+
+<a href="/courses" class="back-link">Back to Courses</a>
+
+</body>
+</html>

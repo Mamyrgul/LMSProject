@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instructor's Courses</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ecf0f1;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2980b9;
+      font-size: 36px;
+      margin-top: 30px;
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 20px;
+    }
+
+    li {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
+    }
+
+    li:hover {
+      transform: scale(1.05);
+    }
+
+    strong {
+      color: #2980b9;
+      font-weight: bold;
+    }
+
+    span {
+      display: block;
+      margin: 5px 0;
+      color: #34495e;
+    }
+
+    .back-link {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      width: 200px;
+      margin: 20px auto;
+    }
+
+    .back-link:hover {
+      background-color: #34495e;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Courses for Instructor</h1>
+
+<th:block th:if="${courses.isEmpty()}">
+  <p>No courses assigned to this instructor.</p>
+</th:block>
+
+<ul th:unless="${courses.isEmpty()}">
+  <li th:each="course : ${courses}">
+    <strong>Title:</strong> <span th:text="${course.title}"></span> <br>
+    <strong>Start Date:</strong> <span th:text="${course.dateOfStart}"></span> <br>
+    <strong>Description:</strong> <span th:text="${course.description}"></span> <br>
+    <hr>
+  </li>
+</ul>
+
+<a href="/instructors" class="back-link">Back to Instructors</a>
+
+</body>
+</html>

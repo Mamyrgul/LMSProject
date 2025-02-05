@@ -4,31 +4,121 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Course</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2980b9;
+            margin-top: 30px;
+            font-size: 48px;
+        }
+
+        form {
+            background: #ffffff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 50%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        input[type="text"], input[type="date"], textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+
+        button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1abc9c;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        a {
+            display: inline-block;
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2c3e50;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        a:hover {
+            background-color: #34495e;
+        }
+    </style>
 </head>
 <body>
+
 <h1>Edit Course</h1>
+
 <form th:action="@{/courses/update/{id}(id=${course.id})}" method="post">
     <input type="hidden" name="id" th:value="${course.id}">
 
     <label for="title">Course Title:</label>
     <input type="text" id="title" name="title" th:value="${course.title}" required>
-    <br>
 
     <label for="dateOfStart">Start Date:</label>
     <input type="date" id="dateOfStart" name="dateOfStart" th:value="${course.dateOfStart}" required>
-    <br>
 
     <label for="description">Course Description:</label>
     <textarea id="description" name="description" th:text="${course.description}" required></textarea>
-    <br>
 
     <button type="submit">Save Changes</button>
 </form>
 
 <form th:action="@{/courses/delete/{id}(id=${course.id})}" method="get" style="display:inline;">
-    <button type="submit" style="background-color: red; color: white;">Delete Course</button>
+    <button type="submit" class="delete-button">Delete Course</button>
 </form>
 
 <a href="/courses">Back to Courses</a>
+
 </body>
 </html>

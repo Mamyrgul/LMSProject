@@ -1,7 +1,9 @@
 package java16.service.serviceImpl;
 
 import java16.entities.Course;
+import java16.entities.Instructor;
 import java16.entities.Lesson;
+import java16.entities.Student;
 import java16.repository.CourseRepo;
 import java16.service.CourseService;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +43,15 @@ public class CourseServiceImpl  implements CourseService {
     @Override
     public String updateCourse(Long id, Course course) {
         return courseRepo.updateCourse(id, course);
+    }
+
+    @Override
+    public List<Instructor> findInstructorsByCourseId(Long courseId) {
+        return courseRepo.findInstructorsByCourseId(courseId);
+    }
+
+    @Override
+    public List<Student> findStudentsByCourseId(Long courseId) {
+        return courseRepo.findStudentsByCourseId(courseId);
     }
 }

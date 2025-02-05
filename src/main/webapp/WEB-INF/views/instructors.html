@@ -4,33 +4,134 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+            font-size: 14px; /* Уменьшение общего размера шрифта */
+        }
+
+        h1 {
+            text-align: center;
+            color: #2980b9;
+            font-size: 28px; /* Уменьшение размера заголовка */
+            margin-top: 30px;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 8px 16px; /* Уменьшение размеров кнопки */
+            border-radius: 5px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.3s;
+            font-size: 14px; /* Уменьшение шрифта на кнопках */
+            margin-top: 10px;
+        }
+
+        .button:hover {
+            background-color: #1abc9c;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px;
+        }
+
+        li {
+            background: linear-gradient(135deg, #2980b9, #8e44ad);
+            color: white;
+            margin: 10px 0; /* Уменьшение отступа между элементами списка */
+            padding: 12px 20px; /* Уменьшение внутренних отступов */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+            font-size: 16px; /* Уменьшение размера шрифта в элементах списка */
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        span {
+            display: inline-block; /* Расположение на одной линии */
+            margin: 0 10px 0 0; /* Отступы для элементов внутри li */
+            font-size: 16px; /* Уменьшение размера шрифта */
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 6px 12px; /* Уменьшение размеров кнопки удаления */
+            border-radius: 5px;
+            border: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        .back-link {
+            background-color: #2c3e50;
+            color: white;
+            padding: 8px 16px; /* Уменьшение размеров кнопки для возврата */
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 20px;
+            display: block;
+            text-align: center;
+            width: 180px; /* Уменьшение ширины кнопки */
+            margin: 20px auto;
+        }
+
+        .back-link:hover {
+            background-color: #34495e;
+        }
+    </style>
 </head>
 <body>
 
 <h1>List of Instructors</h1>
-<a href="/instructors/new">Create New Instructor</a>
+<a href="/instructors/new" class="button">Create New Instructor</a>
 
 <ul>
     <th:block th:each="instructor : ${instructors}">
         <li>
-            <span th:text="${instructor.firstName}"></span> -
-            <span th:text="${instructor.lastName}"></span> -
-            <span th:text="${instructor.email}"></span> -
-            <span th:text="${instructor.phone}"></span>
+            <span th:text="${instructor.id}">Instructor ID</span>
+            <span th:text="${instructor.firstName}">First Name</span> -
+            <span th:text="${instructor.lastName}">Last Name</span> -
+            <span th:text="${instructor.email}">Email</span> -
+            <span th:text="${instructor.phone}">Phone</span>
 
-            <a th:href="@{/instructors/edit/{id}(id=${instructor.id})}">Edit</a>
+            <a th:href="@{/instructors/edit/{id}(id=${instructor.id})}" class="button">Edit</a>
 
-            <form th:action="@{/instructors/delete/{id}(id=${instructor.id})}" method="get" style="display: inline;">
-                <button type="submit" style="color: red;">Delete</button>
+            <form th:action="@{/instructors/delete/{id}(id=${instructor.id})}" method="post" style="display: inline;">
+                <button type="submit" class="delete-button">Delete</button>
             </form>
 
-            <a th:href="@{/instructors/assign}">Assign Instructor</a>
-
-            <a href="/dashboard">Back to Dashboard</a>
-
+            <a th:href="@{/instructors/assign}" class="button">Assign Instructor</a>
+            <a th:href="@{/instructors/{id}/courses(id=${instructor.id})}" class="button">View Courses</a>
         </li>
     </th:block>
 </ul>
+
+<a href="/dashboard" class="back-link">Back to Dashboard</a>
 
 </body>
 </html>

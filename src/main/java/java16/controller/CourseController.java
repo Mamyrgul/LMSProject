@@ -1,6 +1,8 @@
 package java16.controller;
 
 import java16.entities.Course;
+import java16.entities.Instructor;
+import java16.entities.Student;
 import java16.service.CourseService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -47,11 +49,23 @@ public class CourseController {
         return "redirect:/courses";
     }
 
-
     @GetMapping("/delete/{id}")
         public String deleteCourse(@PathVariable("id") Long id) {
             courseService.deleteById(id);
             return "redirect:/courses";
         }
+    @GetMapping("/{id}/students")
+    public String getStudentsByCourse(@PathVariable("id") Long courseId, Model model) {
+        List<Student> students = courseService.findStudentsByCourseId(courseId);
+        model.addAttribute("students", students);
+        return "studentsByCourse";
     }
+    @GetMapping("/{id}/instructors")
+    public String getInstructorsByCourse(@PathVariable("id") Long courseId, Model model) {
+        List<Instructor> instructors = courseService.findInstructorsByCourseId(courseId);
+        model.addAttribute("instructors", instructors);
+        return "instructorsByCourse";
+    }
+
+}
 

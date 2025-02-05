@@ -24,17 +24,17 @@ public class LessonServiceImpl implements LessonService {
     }
 
     @Override
-    public void deleteById(Long id) {
-   lessonRepo.deleteById(id);
-    }
-
-    @Override
     public Lesson findById(Long id) {
         return lessonRepo.findById(id);
     }
 
     @Override
-    public String update(Long id, Lesson lesson) {
-        return lessonRepo.update(id, lesson);
+    public void deleteById(Long courseId, Long LessonId) {
+        lessonRepo.deleteById(courseId, LessonId);
+    }
+
+    @Override
+    public void update(Long courseId, Long lessonId, Lesson updatedLesson) {
+        lessonRepo.update(courseId, lessonId, updatedLesson);
     }
 }

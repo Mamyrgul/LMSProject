@@ -3,34 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Edit Instructor</title>
+  <title>Edit Student</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #ecf0f1;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2980b9;
+      font-size: 36px;
+      margin-top: 30px;
+    }
+
+    form {
+      width: 50%;
+      margin: 0 auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 16px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin: 5px 0 20px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button {
+      background-color: #2980b9;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #1abc9c;
+    }
+
+    .delete-button {
+      background-color: #e74c3c;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .delete-button:hover {
+      background-color: #c0392b;
+    }
+
+    a {
+      display: block;
+      text-align: center;
+      margin-top: 20px;
+      color: #2980b9;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-<h1>Edit Instructor</h1>
-<form action="/students" method="post">
-  <input type="hidden" name="id" th:value="${student.id}">
+<h1>Edit Student</h1>
 
+<!-- Форма для обновления студента -->
+<form th:action="@{/students/update/{id}(id=${student.id})}" method="post">
   <label for="firstName">First Name:</label>
   <input type="text" id="firstName" name="firstName" th:value="${student.firstName}" required>
-  <br>
 
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" th:value="${student.email}" required>
-  <br>
 
   <label for="phone">Phone:</label>
-  <input type="text" id="phone" name="phone" th:value="${student.phoneNumber}" required>
-  <br>
+  <input type="text" id="phone" name="phoneNumber" th:value="${student.phoneNumber}" required>
 
   <button type="submit">Save Changes</button>
 </form>
 
-<form th:action="@{/students/delete/{id}(id=${student.id})}" method="get" style="display:inline;">
-  <button type="submit" style="background-color: red; color: white;">Delete Instructor</button>
+<!-- Форма для удаления студента -->
+<form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" style="display:inline;">
+  <button type="submit" class="delete-button">Delete Student</button>
 </form>
 
-<a href="/students">Back to Instructors</a>
+<br>
+<a href="/students">Back to Students</a>
 
 </body>
 </html>

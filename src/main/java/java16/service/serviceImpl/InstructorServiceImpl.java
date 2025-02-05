@@ -1,5 +1,6 @@
 package java16.service.serviceImpl;
 
+import java16.entities.Course;
 import java16.entities.Instructor;
 import java16.repository.InstructorRepo;
 import java16.service.InstructorService;
@@ -41,5 +42,10 @@ public class InstructorServiceImpl implements InstructorService {
     @Override
     public String updateInstructor(Long id, Instructor instructor) {
         return instructorRepo.updateInstructor(id, instructor);
+    }
+
+    @Override
+    public List<Course> findCoursesByInstructorId(Long instructorId) {
+        return instructorRepo.findCoursesByInstructorId(instructorId);
     }
 }

@@ -24,7 +24,7 @@ public class Lesson {
     String title;
     LocalDate dateOfStart;
     String description;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     Course course;
 
     public Lesson(String title, LocalDate dateOfStart, String description) {

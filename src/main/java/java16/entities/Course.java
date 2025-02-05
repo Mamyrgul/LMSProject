@@ -23,11 +23,11 @@ public class Course {
     String title;
     LocalDate dateOfStart;
     String description;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Instructor> instructors;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Student> students;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Lesson> lessons;
 
     public Course(String title, LocalDate dateOfStart, String description) {

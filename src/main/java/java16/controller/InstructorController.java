@@ -1,11 +1,14 @@
 package java16.controller;
 
+import java16.entities.Course;
 import java16.entities.Instructor;
 import java16.service.InstructorService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/instructors")
@@ -51,6 +54,20 @@ public class InstructorController {
     public String editInstructor(@PathVariable("id") Long id, Model model) {
        model.addAttribute("instructor", instructorService.findById(id));
         return "editInstructor";
+    }
+    @PostMapping("/update/{id}")
+    public String updateInstructor(
+            @PathVariable("id") Long id,
+            @ModelAttribute Instructor updatedInstructor) {
+        instructorService.updateInstructor(id, updatedInstructor);
+        return "redirect:/instructors";
+    }
+
+    @GetMapping("/{id}/courses")
+    public String getCoursesByInstructor(@PathVariable("id") Long instructorId, Model model) {
+        List<Course> courses = instructorService.findCoursesByInstructorId(instructorId);
+        model.addAttribute("courses", courses);
+        return "coursesByInstructor";
     }
 
 }

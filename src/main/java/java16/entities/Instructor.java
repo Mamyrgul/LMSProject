@@ -24,7 +24,7 @@ public class Instructor {
     String lastName;
     String email;
     String phone;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Course> courses;
 
 

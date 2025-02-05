@@ -4,27 +4,103 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Student</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2980b9;
+            font-size: 36px;
+            margin-top: 30px;
+        }
+
+        form {
+            width: 50%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #2980b9;
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2980b9;
+            color: white;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #3498db;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            width: 200px;
+        }
+
+        .back-link:hover {
+            background-color: #34495e;
+        }
+    </style>
 </head>
 <body>
 
 <h1>Create New Student</h1>
+
 <form action="/students" method="post">
     <label for="firstName">First Name:</label>
     <input type="text" id="firstName" name="firstName" required>
-    <br>
 
     <label for="email">Email:</label>
     <input type="email" id="email" name="email" required>
-    <br>
 
     <label for="phoneNumber">Phone:</label>
     <input type="text" id="phoneNumber" name="phoneNumber" required>
-    <br>
 
-    <button type="submit">Save Students</button>
+    <button type="submit">Save Student</button>
 </form>
 
-<a href="/students">Back to Students</a>
+<a href="/students" class="back-link">Back to Students</a>
 
 </body>
 </html>

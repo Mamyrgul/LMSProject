@@ -3,27 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <title>Lessons</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: white;
+            margin: 15px;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        li span {
+            display: block;
+            margin: 5px 0;
+        }
+
+        .button {
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-right: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #2980b9;
+        }
+
+        form {
+            display: inline;
+        }
+
+        .delete-button {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: darkred;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            text-decoration: none;
+            background-color: #2c3e50;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .back-link:hover {
+            background-color: #34495e;
+        }
+    </style>
 </head>
 <body>
+
 <h2>Lessons for Course</h2>
 
 <ul th:if="${lessons != null and not #lists.isEmpty(lessons)}">
     <li th:each="lesson : ${lessons}">
-        <span th:text="${lesson.title}"></span>
-        <span th:text="${lesson.dateOfStart}"></span>
-        <span th:text="${lesson.description}"></span>
+        <span th:text="${lesson.id}">Lesson ID</span>
+        <span th:text="${lesson.title}">Lesson Title</span>
+        <span th:text="${lesson.dateOfStart}">Start Date</span>
+        <span th:text="${lesson.description}">Description</span>
 
-        <a th:href="@{/lessons/edit/{id}(id=${lesson.id})}">Edit</a>
+        <!-- Update button -->
+        <a th:href="@{/lessons/edit/{courseId}/{id}(courseId=${courseId}, id=${lesson.id})}" class="button">Update</a>
 
-        <form th:action="@{/lessons/delete/{id}(id=${lesson.id})}" method="post" style="display:inline;">
-            <input type="hidden" name="courseId" th:value="${courseId}">
-            <button type="submit">Delete</button>
+        <!-- Delete form -->
+        <form th:action="@{/lessons/delete/{courseId}/{lessonId}(courseId=${courseId}, lessonId=${lesson.id})}" method="post" style="display:inline;">
+            <button type="submit" class="delete-button">Delete</button>
         </form>
     </li>
 </ul>
 
-<p th:if="${lessons == null or #lists.isEmpty(lessons)}">No lessons available.</p>
+<p th:if="${lessons == null or #lists.isEmpty(lessons)}" style="text-align: center;">No lessons available.</p>
 
-<a th:href="@{/courses}">Back to Courses</a>
+<!-- Back link to Courses -->
+<a th:href="@{/courses}" class="back-link">Back to Courses</a>
+
 </body>
 </html>

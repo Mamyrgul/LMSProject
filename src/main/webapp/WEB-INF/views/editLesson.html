@@ -2,18 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Lesson</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ecf0f1;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #2980b9;
+            font-size: 36px;
+            margin-top: 30px;
+        }
+
+        form {
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #2980b9;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #1abc9c;
+        }
+
+        .delete-button {
+            background-color: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .delete-button:hover {
+            background-color: #c0392b;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2980b9;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+
 <h2>Edit Lesson</h2>
 
-<form th:action="@{/lessons/update/{id}(id=${lesson.id})}" method="post">
+<!-- Форма для обновления урока -->
+<form th:action="@{/lessons/update/{courseId}/{id}(courseId=${courseId}, id=${lesson.id})}" method="post">
+    <input type="hidden" name="id" th:value="${lesson.id}">
+    <input type="hidden" name="courseId" th:value="${courseId}">
+
     <label for="title">Lesson Title:</label>
     <input type="text" id="title" name="title" th:value="${lesson.title}" required>
 
-    <br><br>
+    <label for="dateOfStart">Start Date:</label>
+    <input type="date" id="dateOfStart" name="dateOfStart" th:value="${lesson.dateOfStart}" required>
+
+    <label for="description">Lesson Description:</label>
+    <textarea id="description" name="description" required>[[${lesson.description}]]</textarea>
 
     <button type="submit">Update</button>
 </form>
+
+<!-- Форма для удаления урока -->
+<form th:action="@{/lessons/delete/{courseId}/{lessonId}(courseId=${courseId}, lessonId=${lesson.id})}" method="post" style="display:inline;">
+    <button type="submit" class="delete-button">Delete Lesson</button>
+</form>
+
+<br>
+<a th:href="@{/lessons(courseId=${courseId})}">Back to Lessons</a>
+
 </body>
 </html>

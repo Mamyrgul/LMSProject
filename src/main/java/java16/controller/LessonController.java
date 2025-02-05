@@ -35,24 +35,29 @@ public class LessonController {
             lessonService.save(courseId, lesson);
             return "redirect:/courses";
         }
-
-    @PostMapping("/delete/{id}")
-    public String deleteLesson(@PathVariable("id") Long id) {
-        lessonService.deleteById(id);
-        return "redirect:/lessons";
+    @GetMapping("/edit/{courseId}/{id}")
+    public String showEditForm(@PathVariable("courseId") Long courseId, @PathVariable("id") Long lessonId, Model model) {
+        Lesson lesson = lessonService.findById(lessonId);
+        model.addAttribute("lesson", lesson);
+        model.addAttribute("courseId", courseId);
+        return "editLesson";
     }
 
-        @GetMapping("/edit/{id}")
-        public String showEditForm(@PathVariable("id") Long id, Model model) {
-            Lesson lesson = lessonService.findById(id);
-            model.addAttribute("lesson", lesson);
-            return "editLesson";
-        }
+    @PostMapping("/update/{courseId}/{id}")
+    public String updateLesson(
+            @PathVariable("courseId") Long courseId,
+            @PathVariable("id") Long lessonId,
+            @ModelAttribute Lesson updatedLesson) {
+        lessonService.update(courseId, lessonId, updatedLesson);
+        return "redirect:/lessons?courseId=" + courseId;
+    }
 
-        @PostMapping("/update/{id}")
-        public String updateLesson(@PathVariable("id") Long id, @ModelAttribute Lesson lesson, @RequestParam("courseId") Long courseId) {
-            lessonService.update(id, lesson);
-            return "redirect:/lessons";
-        }
+
+    // Метод для удаления урока
+    @PostMapping("/delete/{courseId}/{lessonId}")
+    public String deleteLesson(@PathVariable("courseId") Long courseId, @PathVariable("lessonId") Long lessonId) {
+        lessonService.deleteById(courseId, lessonId);
+        return "redirect:/courses";
+    }
     }
 

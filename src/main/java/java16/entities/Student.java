@@ -23,7 +23,7 @@ public class Student {
     private String firstName;
     private String email;
     private String phoneNumber;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Course> courses;
 
     public Student(String firstName, String email, String phoneNumber) {

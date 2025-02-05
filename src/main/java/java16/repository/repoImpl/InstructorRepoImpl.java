@@ -1,6 +1,7 @@
 package java16.repository.repoImpl;
 
 import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 import java16.entities.Course;
@@ -31,6 +32,9 @@ public class InstructorRepoImpl implements InstructorRepo {
     @Override
     public String updateInstructor(Long id, Instructor updatedInstructor) {
         Instructor instructor = entityManager.find(Instructor.class, id);
+        if (instructor == null) {
+            throw new EntityNotFoundException("Instructor with id " + id + " not found");
+        }
         instructor.setFirstName(updatedInstructor.getFirstName());
         instructor.setLastName(updatedInstructor.getLastName());
         instructor.setEmail(updatedInstructor.getEmail());
@@ -55,14 +59,20 @@ public class InstructorRepoImpl implements InstructorRepo {
 
     @Override
     public void deleteById(Long id) {
-    Instructor instructor = entityManager.find(Instructor.class, id);
-    entityManager.remove(instructor);
-        System.out.println("successfully deleted");
-    }
-
+            Instructor instructor = entityManager.find(Instructor.class, id);
+            for (Course course : instructor.getCourses()) {
+                course.setInstructors(null);
+            }
+            entityManager.remove(instructor);
+        }
     @Override
     public Instructor findById(Long id) {
         Instructor instructor = entityManager.find(Instructor.class, id);
         return instructor;
     }
+    public List<Course> findCoursesByInstructorId(Long instructorId) {
+        Instructor instructor = entityManager.find(Instructor.class, instructorId);
+        return instructor.getCourses();
+    }
+
 }

@@ -4,32 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Students</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    h1 {
+      text-align: center;
+      color: #2980b9;
+      font-size: 36px;
+      margin-top: 30px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2980b9;
+      font-size: 18px;
+    }
+
+    a:hover {
+      color: #3498db;
+    }
+
+    .student-list {
+      width: 80%;
+      margin: 30px auto;
+      padding: 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .student-item {
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: #fafafa;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .student-item span {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .student-item a {
+      margin-left: 10px;
+      color: #2980b9;
+      font-size: 16px;
+    }
+
+    .student-item a:hover {
+      color: #3498db;
+    }
+
+    .delete-btn {
+      color: red;
+      font-size: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      color: #e74c3c;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-top: 30px;
+      background-color: #2c3e50;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      text-align: center;
+      width: 200px;
+    }
+
+    .back-link:hover {
+      background-color: #34495e;
+    }
+  </style>
 </head>
 <body>
 
 <h1>List of Students</h1>
-<a href="/students/new">Create New Student</a>
+<a href="/students/new" class="back-link">Create New Student</a>
 
-<ul>
+<div class="student-list">
   <th:block th:each="student : ${students}">
-    <li>
-      <span th:text="${student.firstName}"></span> -
-      <span th:text="${student.email}"></span> -
-      <span th:text="${student.phoneNumber}"></span>
+    <div class="student-item">
+      <div>
+        <span th:text="${student.id}"></span> -
+        <span th:text="${student.firstName}"></span> -
+        <span th:text="${student.email}"></span> -
+        <span th:text="${student.phoneNumber}"></span>
+      </div>
 
-      <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
-
-      <form th:action="@{/students/delete/{id}(id=${student.id})}" method="get" style="display: inline;">
-        <button type="submit" style="color: red;">Delete</button>
-      </form>
-
-      <a th:href="@{/students/assign}">Assign Student</a>
-
-      <a href="/dashboard">Back to Dashboard</a>
-    </li>
+      <div>
+        <a th:href="@{/students/edit/{id}(id=${student.id})}">Edit</a>
+        <form th:action="@{/students/delete/{id}(id=${student.id})}" method="post" style="display: inline;">
+          <button type="submit" class="delete-btn">Delete</button>
+        </form>
+        <a th:href="@{/students/assign}">Assign Student</a>
+        <a th:href="@{/students/{id}/courses(id=${student.id})}">View Courses</a>
+      </div>
+    </div>
   </th:block>
-</ul>
+</div>
+
+<a href="/dashboard" class="back-link">Back to Dashboard</a>
 
 </body>
 </html>
-

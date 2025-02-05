@@ -12,4 +12,5 @@ public interface StudentRepo {
     Student findById(Long id);
     String update(Long id,Student student);
     String assignToCourse(Long courseId, Long studentId);
+    List<Course> findCoursesByStudentId(Long studentId);
 }

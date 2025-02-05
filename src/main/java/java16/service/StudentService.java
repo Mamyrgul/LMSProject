@@ -1,5 +1,6 @@
 package java16.service;
 
+import java16.entities.Course;
 import java16.entities.Student;
 
 import java.util.List;
@@ -11,4 +12,5 @@ public interface StudentService {
     Student findById(Long id);
     String update(Long id,Student student);
     String assignToCourse(Long courseId, Long studentId);
+    public List<Course> findCoursesByStudentId(Long studentId);
 }
